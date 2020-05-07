@@ -24,3 +24,5 @@ Send new entries of your google form into a Discord Channel.
 ![](https://i.phodit.xyz/z5ygfpLql)
 
 You now should receive new entries into your Discord channel.
+
+> Check original repo: https://github.com/Iku/Google-Forms-to-Discord
