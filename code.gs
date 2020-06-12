@@ -10,25 +10,25 @@ function onSubmit(e) {
   for (var i = 0; i < response.length; i++) {
     var question = response[i].getItem().getTitle();
     var answer = response[i].getResponse();
-    var parts = answer.match(/[\s\S]{1,1024}/g) || [];
-
-    if (answer == "") {
-      continue;
+    try {
+      var parts = answer.match(/[\s\S]{1,1024}/g) || [];
+    } catch (e) {
+      var parts = answer;
     }
+
+    if (answer == "") continue;
+
     for (var j = 0; j < parts.length; j++) {
-      if (j == 0) {
-        items.push({
-          "name": question,
-          "value": parts[j],
-          "inline": false
-        });
-      } else {
-        items.push({
-          "name": question.concat(" (cont.)"),
-          "value": parts[j],
-          "inline": false
-        });
-      }
+      if (j == 0) items.push({
+        "name": question,
+        "value": parts[j],
+        "inline": false
+      });
+      else items.push({
+        "name": question.concat(" (cont.)"),
+        "value": parts[j],
+        "inline": false
+      });
     }
   }
 
@@ -36,6 +36,7 @@ function onSubmit(e) {
     "method": "post",
     "headers": {"Content-Type": "application/json"},
     "payload": JSON.stringify({
+      "content": " ",
       "embeds": [{
         "title": "EMBED TITLE",
         "color": 15844367,
